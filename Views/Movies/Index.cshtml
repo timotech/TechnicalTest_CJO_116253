@@ -13,12 +13,12 @@
 <form asp-controller="Movies" asp-action="Index" method="get">
     <p>
         <select asp-for="MovieGenreFilter" asp-items="Model.Genres">
-            <option value="">All</option>
+            <option value="All">All</option>
         </select>
 
         Title: <input type="text" asp-for="SearchString" id="SearchString" />
         <input type="submit" value="Filter" />
-        <button id="CalculateWords">Count Words</button>
+        <input type="button" id="CalculateWords" value="Count Words"/>
         <label id="wordcount"></label>
     </p>
 </form>

@@ -1,9 +1,43 @@
-﻿
+﻿@model IEnumerable<MvcMovie.Models.Movie>
 @{
-    ViewData["Title"] = "Generate";
+    ViewData["Title"] = "Generate TBX File";
 }
 
 <h1>Generating TBX File</h1>
 
 
+<?xml version="1.0" encoding="UTF-8" ?>
+<martif type="TBX" xml:lang="en-US">
+    <martifHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>CJO 116253 Net Software Engineer (gText)</title>
+            </titleStmt>
+            <sourceDesc>
+                <p>Timothy Ayodele</p>
+            </sourceDesc>
+        </fileDesc>
+    </martifHeader>
+    <text>
+        <body>
+            @foreach (var item in Model)
+            {
+            <termEntry id="@item.Id">
+                <langSet xml:lang="en-US">
+                    <descripGrp>
+                        <descrip type="definition">@item.Genre</descrip>
+                    </descripGrp>
+                    <ntig>
+                        <termGrp>
+                            <term id="@item.Id">@item.Title</term>
+                            <termNote type="partOfSpeech">@item.Rating</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <br />
+            }
+        </body>
+    </text>
+</martif>
 

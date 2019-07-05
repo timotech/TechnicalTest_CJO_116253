@@ -20,7 +20,7 @@ namespace MvcMovie.Controllers
 
         #region snippet_SearchGenre
         // GET: Movies
-        public async Task<IActionResult> Index(string movieGenre, string searchString)
+        public async Task<IActionResult> Index(string MovieGenreFilter, string searchString)
         {
             #region snippet_LINQ
             // Use LINQ to get list of genres.
@@ -34,15 +34,13 @@ namespace MvcMovie.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.Title.Contains(movieGenre));
+                movies = movies.Where(s => s.Title.Contains(searchString));
             }
 
-            if (!string.IsNullOrEmpty(movieGenre))
+            if (!string.IsNullOrEmpty(MovieGenreFilter))
             {
-                movies = movies.Where(x => x.Genre == searchString);
-            }
-
-            var listItems = await genreQuery.Distinct().ToListAsync();
+                movies = movies.Where(x => x.Genre == MovieGenreFilter);
+            }                      
 
             var movieGenreVM = new MovieGenreViewModel
             {
@@ -201,7 +199,9 @@ namespace MvcMovie.Controllers
 
         public IActionResult Generate()
         {
-            return View();
+            var details = _context.Movie.ToList();
+            return View(details);
+            //Note i've never worked with a tbf file before, just improvising
         }
     }
 }
