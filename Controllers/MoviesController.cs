@@ -109,18 +109,20 @@ namespace MvcMovie.Controllers
 
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {
+        {            
+            var movie = await _context.Movie.FindAsync(id);
+
             if (id != null)
             {
-                return NotFound();
+                return View(movie);
             }
 
-            var movie = await _context.Movie.FindAsync(id);
             if (movie == null)
             {
                 return NotFound();
             }
-            return View(movie);
+
+            return View();
         }
 
         // POST: Movies/Edit/5
