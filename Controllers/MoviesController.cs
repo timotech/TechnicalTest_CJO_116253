@@ -65,7 +65,7 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
-            else id = 5;
+            //else id = 5;
 
             var movie = await _context.Movie
                 .FirstOrDefaultAsync(m => m.Id == id);
