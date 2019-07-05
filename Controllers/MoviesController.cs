@@ -42,6 +42,8 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(x => x.Genre == searchString);
             }
 
+            var listItems = genreQuery.Distinct().ToListAsync();
+
             var movieGenreVM = new MovieGenreViewModel
             {
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
@@ -170,7 +172,8 @@ namespace MvcMovie.Controllers
             }
 
             var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id - 1);
+                .FirstOrDefaultAsync(m => m.Id == id);
+            //Adjusted movie delete from m.Id == id - 1 to m.Id == id so as to delete the right movie
             if (movie == null)
             {
                 return NotFound();
