@@ -42,7 +42,7 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(x => x.Genre == searchString);
             }
 
-            var listItems = genreQuery.Distinct().ToListAsync();
+            var listItems = await genreQuery.Distinct().ToListAsync();
 
             var movieGenreVM = new MovieGenreViewModel
             {
@@ -111,7 +111,7 @@ namespace MvcMovie.Controllers
 
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {            
+        {
             var movie = await _context.Movie.FindAsync(id);
 
             if (id != null)
@@ -197,6 +197,11 @@ namespace MvcMovie.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.Id == id);
+        }
+
+        public IActionResult Generate()
+        {
+            return View();
         }
     }
 }
